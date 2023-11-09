@@ -2,6 +2,7 @@ package com.tests;
 
 import com.cta.pages.HomePage;
 import com.cta.pages.SignInPage;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -14,6 +15,7 @@ public class RegistrationTest extends BaseTest{
     public void setLoginPage(){
         this.homePage = new HomePage(driver);
         this.signInPage = new SignInPage(driver);
+        ObjectMapper objectMapper = new ObjectMapper();
         homePage.goTo("http://www.automationpractice.pl/index.php");
     }
 
@@ -25,11 +27,20 @@ public class RegistrationTest extends BaseTest{
     }
 
     @Test
-    public void registerTest(){
+    public void invalidRegisterTest(){
+        signInPage.goTo();
         signInPage.enterEmail("notvalidemailhere");
         signInPage.submitEmailForRegistration();
-        Assert.assertEquals(signInPage.isValidInput(), false);
+        Assert.assertEquals(signInPage.isInvalidInput(), true);
         Assert.assertEquals(signInPage.invalidInputMessage(), "Invalid email address.");
+    }
+
+    @Test
+    public void successfulRegistrationTest(){
+        signInPage.goTo();
+        signInPage.enterEmail("email@em.com");
+        signInPage.submitEmailForRegistration();
+        Assert.assertEquals(signInPage.isValidInput(), true);
     }
 
 }

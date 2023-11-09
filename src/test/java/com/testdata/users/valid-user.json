@@ -1,0 +1,10 @@
+{
+  "gender": "m",
+  "fName": "Cy",
+  "lName": "Ng",
+  "email": "is@valid.com",
+  "password": "5char",
+  "dateOfBirth": "1",
+  "monthOfBirth": "January",
+  "yearOfBirth": "1958"
+}

@@ -8,9 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class HomePage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class HomePage extends BasePage {
 
     @FindBy(id = "homepage-slider")
     private WebElement homePageSlider;
@@ -22,10 +20,11 @@ public class HomePage {
     private WebElement homePageTabs;
 
     public HomePage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        super(driver);
     }
+
+
+
 
     public void goTo(String homePageURL){
         driver.get(homePageURL);

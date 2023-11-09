@@ -1,5 +1,6 @@
 package com.cta.pages;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,9 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class SignInPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class SignInPage extends BasePage {
 
     @FindBy(css="#header .login")
     private WebElement signInPortal;
@@ -45,9 +44,7 @@ public class SignInPage {
 
 
     public SignInPage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        super(driver);
     }
 
     public void goTo(){
@@ -70,10 +67,19 @@ public class SignInPage {
 
     public void submitEmailForRegistration(){
         registerEmailButton.click();
+        wait.until(ExpectedConditions.or(
+                ExpectedConditions.visibilityOf(emailInputFine),
+                ExpectedConditions.visibilityOf(errorMessageElem)
+        ));
     }
 
     public boolean isValidInput(){
         return emailInputFine.isDisplayed();
+    }
+
+    public boolean isInvalidInput(){
+
+        return errorMessageElem.isDisplayed();
     }
 
     public String invalidInputMessage(){
