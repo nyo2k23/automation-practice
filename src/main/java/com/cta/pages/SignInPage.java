@@ -42,6 +42,9 @@ public class SignInPage extends BasePage {
     @FindBy(css = "#create_account_error ol li")
     private WebElement errorMessageElem;
 
+    @FindBy(css = "count-creation_form > div.account_creation > h3")
+    private WebElement pageSubHeading;
+
 
     public SignInPage(WebDriver driver){
         super(driver);
@@ -65,11 +68,12 @@ public class SignInPage extends BasePage {
         registerEmailInput.sendKeys(email);
     }
 
-    public void submitEmailForRegistration(){
+    public void submitEmailToBeginRegistration(){
         registerEmailButton.click();
         wait.until(ExpectedConditions.or(
                 ExpectedConditions.visibilityOf(emailInputFine),
-                ExpectedConditions.visibilityOf(errorMessageElem)
+                ExpectedConditions.visibilityOf(errorMessageElem),
+                ExpectedConditions.textToBePresentInElement(pageSubHeading, "Your personal information".)
         ));
     }
 

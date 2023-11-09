@@ -4,7 +4,7 @@
   "lName": "Ng",
   "email": "is@valid.com",
   "password": "5char",
-  "dateOfBirth": "1",
+  "dateOfBirth": 1,
   "monthOfBirth": "January",
-  "yearOfBirth": "1958"
+  "yearOfBirth": 1958
 }

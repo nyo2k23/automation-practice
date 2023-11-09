@@ -2,7 +2,7 @@ package com.cta.models;
 
 public record User(
         String gender,
-        String fnAME,
+        String fName,
         String lName,
         String email,
         String password,

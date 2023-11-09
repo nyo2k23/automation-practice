@@ -4,7 +4,7 @@
   "lName": "PbkJ",
   "email": "is@email.com",
   "password": "kjjaakjl",
-  "dateOfBirth": "10",
+  "dateOfBirth": 10,
   "monthOfBirth": "May",
-  "yearOfBirth": "1988"
+  "yearOfBirth": 1988
 }

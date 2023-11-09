@@ -4,7 +4,7 @@
   "lName": "Niz",
   "email": "an@email.co.uk",
   "password": "not5",
-  "dateOfBirth": "30",
+  "dateOfBirth": 30,
   "monthOfBirth": "June",
-  "yearOfBirth": "1995"
+  "yearOfBirth": 1995
 }
