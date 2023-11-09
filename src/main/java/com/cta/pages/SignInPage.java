@@ -73,7 +73,7 @@ public class SignInPage extends BasePage {
         wait.until(ExpectedConditions.or(
                 ExpectedConditions.visibilityOf(emailInputFine),
                 ExpectedConditions.visibilityOf(errorMessageElem),
-                ExpectedConditions.textToBePresentInElement(pageSubHeading, "Your personal information".)
+                ExpectedConditions.textToBePresentInElement(pageSubHeading, "Your personal information")
         ));
     }
 
