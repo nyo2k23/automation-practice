@@ -12,4 +12,11 @@ public class Constants {
     public static final String ACCOUNT_CREATION_SUCCESS_MSG = "Your account has been created.";
     public static final String LOGIN_EMAIL_INVALID_ERROR_MSG = "Invalid email address.";
     public static final String LOGIN_PASSWORD_INVALID_ERROR_MSG = "Invalid password.";
+
+    public static final String DRESSES_PAGE_TITLE = "Dresses";
+    public static final String DRESS_NAME = "Printed Summer Dress";
+
+    public static final String SUCCESSFULLY_ADDED_TO_CART_MSG = "Product successfully added to your shopping cart";
+
+
 }
