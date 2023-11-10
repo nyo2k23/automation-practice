@@ -1,15 +1,9 @@
 package com.cta.pages;
 
-import com.cta.utils.Constants;
-import com.fasterxml.jackson.databind.ser.Serializers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class SignInPage extends BasePage {
 
@@ -37,14 +31,23 @@ public class SignInPage extends BasePage {
     @FindBy(id = "form-group form-ok")
     private WebElement emailInputFine;
 
-    @FindBy(id = "create_account_error")
-    private WebElement emailInputError;
+    @FindBy(css = ".alert-danger ol li")
+    private WebElement loginErrorMsgElem;
 
     @FindBy(css = "#create_account_error ol li")
-    private WebElement errorMessageElem;
+    private WebElement registrationErrorMessageElem;
 
     @FindBy(css = "h3.page-subheading")
     private WebElement pageSubHeading;
+
+    @FindBy(id = "email")
+    private WebElement emailLoginField;
+
+    @FindBy(id = "passwd")
+    private WebElement passwordLoginField;
+
+    @FindBy(id = "SubmitLogin")
+    private WebElement submitLoginBtn;
 
 
     public SignInPage(WebDriver driver){
@@ -64,7 +67,7 @@ public class SignInPage extends BasePage {
         return registerForm.isDisplayed() && loginForm.isDisplayed();
     }
 
-    public void enterEmail(String email){
+    public void enterEmailToRegister(String email){
         wait.until(ExpectedConditions.visibilityOf(registerForm));
         registerEmailInput.sendKeys(email);
     }
@@ -72,8 +75,23 @@ public class SignInPage extends BasePage {
     public void submitEmailToBeginRegistration(){
         registerEmailButton.click();
         wait.until(ExpectedConditions.or(
-                ExpectedConditions.visibilityOf(errorMessageElem),
+                ExpectedConditions.visibilityOf(registrationErrorMessageElem),
                 ExpectedConditions.invisibilityOf(registerEmailButton)
+        ));
+    }
+
+
+    public void enterLoginDetails(String email, String password){
+        emailLoginField.sendKeys(email);
+        passwordLoginField.sendKeys(password);
+
+    }
+
+    public void submitLogin(){
+        submitLoginBtn.click();
+        wait.until(ExpectedConditions.or(
+                ExpectedConditions.visibilityOf(loginErrorMsgElem),
+                ExpectedConditions.invisibilityOf(submitLoginBtn)
         ));
     }
 
@@ -83,11 +101,13 @@ public class SignInPage extends BasePage {
 
     public boolean isInvalidInput(){
 
-        return errorMessageElem.isDisplayed();
+        return registrationErrorMessageElem.isDisplayed();
     }
 
-    public String invalidInputMessage(){
-        return errorMessageElem.getText();
+    public String invalidRegistrationInputMessage(){
+        return registrationErrorMessageElem.getText();
     }
+
+    public String invalidLoginInputMsg() { return loginErrorMsgElem.getText(); }
 
 }

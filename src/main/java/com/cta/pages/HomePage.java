@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -18,6 +20,9 @@ public class HomePage extends BasePage {
 
     @FindBy(id = "home-page-tabs")
     private WebElement homePageTabs;
+
+    @FindBy (className = "a.logout")
+    private WebElement logOutBtn;
 
     public HomePage(WebDriver driver){
         super(driver);
@@ -38,5 +43,10 @@ public class HomePage extends BasePage {
         return homePageSlider.isDisplayed() &&
                 homePageTabs.isDisplayed() &&
                 homePageContentContainer.isDisplayed();
+    }
+
+    public void logOut(){
+        logOutBtn.click();
+        wait.until(ExpectedConditions.invisibilityOf(logOutBtn));
     }
 }

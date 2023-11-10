@@ -39,7 +39,7 @@ public class RegistrationTest extends BaseTest{
     public void invalidRegistrationTest1() throws IOException {
         File file = new File("src/test/java/com/testdata/users/invalid-user-no-fname.json");
         User user = objectMapper.readValue(file, User.class);
-        signInPage.enterEmail(user.email());
+        signInPage.enterEmailToRegister(user.email());
         signInPage.submitEmailToBeginRegistration();
         Assert.assertEquals(registrationPage.registrationFormIsPresent(), true);
         registrationPage.enterUserDetails(
@@ -59,7 +59,7 @@ public class RegistrationTest extends BaseTest{
     public void invalidRegistrationTest2() throws IOException {
         File file = new File("src/test/java/com/testdata/users/invalid-user-fname-max-len.json");
         User user = objectMapper.readValue(file, User.class);
-        signInPage.enterEmail(user.email());
+        signInPage.enterEmailToRegister(user.email());
         signInPage.submitEmailToBeginRegistration();
         Assert.assertEquals(registrationPage.registrationFormIsPresent(), true);
         registrationPage.enterUserDetails(
@@ -80,7 +80,7 @@ public class RegistrationTest extends BaseTest{
     public void invalidRegistrationTest3() throws IOException {
         File file = new File("src/test/java/com/testdata/users/invalid-user-pwd-max-len.json");
         User user = objectMapper.readValue(file, User.class);
-        signInPage.enterEmail(user.email());
+        signInPage.enterEmailToRegister(user.email());
         signInPage.submitEmailToBeginRegistration();
         Assert.assertEquals(registrationPage.registrationFormIsPresent(), true);
         registrationPage.enterUserDetails(
@@ -100,7 +100,7 @@ public class RegistrationTest extends BaseTest{
     public void invalidRegistrationTest4() throws IOException {
         File file = new File("src/test/java/com/testdata/users/invalid-user-no-pwd.json");
         User user = objectMapper.readValue(file, User.class);
-        signInPage.enterEmail(user.email());
+        signInPage.enterEmailToRegister(user.email());
         signInPage.submitEmailToBeginRegistration();
         Assert.assertEquals(registrationPage.registrationFormIsPresent(), true);
         registrationPage.enterUserDetails(
@@ -113,7 +113,7 @@ public class RegistrationTest extends BaseTest{
                 user.yearOfBirth()
         );
         registrationPage.submitUserDetails();
-        Assert.assertEquals(registrationPage.getRegistrationErrorMsg(), Constants.PASSWORD_INVALID_ERROR_MSG);
+        Assert.assertEquals(registrationPage.getRegistrationErrorMsg(), Constants.REGISTRATION_PASSWORD_INVALID_ERROR_MSG);
     }
 
 
@@ -123,7 +123,7 @@ public class RegistrationTest extends BaseTest{
         User user = objectMapper.readValue(file, User.class);
         RandomStringGenerator randomStringGenerator = new RandomStringGenerator();
         String randomEmail = randomStringGenerator.generateEmail();
-        signInPage.enterEmail(randomEmail);
+        signInPage.enterEmailToRegister(randomEmail);
         signInPage.submitEmailToBeginRegistration();
         Assert.assertEquals(registrationPage.registrationFormIsPresent(), true);
         registrationPage.enterUserDetails(
@@ -138,5 +138,11 @@ public class RegistrationTest extends BaseTest{
         registrationPage.submitUserDetails();
         Assert.assertEquals(registrationPage.getRegistrationSuccessMsg(), Constants.ACCOUNT_CREATION_SUCCESS_MSG);
         Assert.assertEquals(registrationPage.getNameOfRegisteredUser(), user.fName() + " " + user.lName());
+
+    }
+
+    @Test(dependsOnMethods = "validRegistrationTest")
+    public void validLoginTest(){
+
     }
 }

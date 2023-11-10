@@ -1,0 +1,10 @@
+{
+  "gender": "f",
+  "fName": "Jkuila",
+  "lName": "Obajl",
+  "email": "users@email.com",
+  "password": "5char",
+  "dateOfBirth": 10,
+  "monthOfBirth": "April",
+  "yearOfBirth": 1978
+}
