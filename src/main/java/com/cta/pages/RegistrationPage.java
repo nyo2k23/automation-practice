@@ -3,6 +3,7 @@ package com.cta.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 public class RegistrationPage extends BasePage {
@@ -43,6 +44,18 @@ public class RegistrationPage extends BasePage {
     @FindBy(className = "alert-danger")
     private WebElement alertContainer;
 
+    @FindBy(css = ".alert-danger ol li")
+    private WebElement alertErrorMsg;
+
+    @FindBy(className = "alert-success")
+    private WebElement registrationSuccessAlert;
+
+    @FindBy (css = "#header div:nth-child(1) > a > span")
+    private WebElement accountHolder;
+
+    @FindBy (className = "a.logout")
+    private WebElement logOutBtn;
+
     public RegistrationPage(WebDriver driver) {
         super(driver);
     }
@@ -62,7 +75,6 @@ public class RegistrationPage extends BasePage {
             String gender,
             String fnAME,
             String lName,
-            String email,
             String password,
             int dateOfBirth,
             String monthOfBirth,
@@ -75,16 +87,35 @@ public class RegistrationPage extends BasePage {
         }
         fNameInputField.sendKeys(fnAME);
         lNameInputField.sendKeys((lName));
-        emailInputField.sendKeys(email);
         passwordInputField.sendKeys(password);
         Select birthDateSelection = new Select(dateOfBirthInputField);
         Select birthMonthSelection = new Select(monthOfBirthInputField);
         Select birthYearSelection = new Select(yearOfBirthInputField);
         birthDateSelection.selectByValue(String.valueOf(dateOfBirth));
-        birthMonthSelection.selectByValue(monthOfBirth);
-        birthYearSelection.selectByValue(String.valueOf(yearOfBirth));
+        birthMonthSelection.selectByVisibleText(monthOfBirth + " ");
+        birthYearSelection.selectByVisibleText(String.valueOf(yearOfBirth) + "  ");
     }
 
+    public void submitAccount(){
+        submitBtn.click();
+        wait.until(ExpectedConditions.or(
+                ExpectedConditions.visibilityOf(alertContainer),
+                ExpectedConditions.invisibilityOf(submitBtn)
+        ));
+
+    }
+
+    public String getRegistrationSuccessMsg(){
+        return registrationSuccessAlert.getText();
+    }
+
+    public String getRegistrationErrorMsg(){
+        return alertErrorMsg.getText();
+    }
+
+    public String getNameOfRegisteredUser(){
+        return accountHolder.getText();
+    }
     // alertContainer -->  text()
     // firstname is too long. Maximum length: 32
     //  firstname is required.

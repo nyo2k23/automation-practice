@@ -1,5 +1,6 @@
 package com.cta.pages;
 
+import com.cta.utils.Constants;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,7 +43,7 @@ public class SignInPage extends BasePage {
     @FindBy(css = "#create_account_error ol li")
     private WebElement errorMessageElem;
 
-    @FindBy(css = "count-creation_form > div.account_creation > h3")
+    @FindBy(css = "h3.page-subheading")
     private WebElement pageSubHeading;
 
 
@@ -71,9 +72,8 @@ public class SignInPage extends BasePage {
     public void submitEmailToBeginRegistration(){
         registerEmailButton.click();
         wait.until(ExpectedConditions.or(
-                ExpectedConditions.visibilityOf(emailInputFine),
                 ExpectedConditions.visibilityOf(errorMessageElem),
-                ExpectedConditions.textToBePresentInElement(pageSubHeading, "Your personal information")
+                ExpectedConditions.invisibilityOf(registerEmailButton)
         ));
     }
 

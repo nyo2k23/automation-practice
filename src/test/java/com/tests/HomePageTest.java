@@ -18,4 +18,5 @@ public class HomePageTest extends BaseTest {
     public void HomePageTest(){
         Assert.assertEquals(homePage.uniqueHomePageElementsAreDisplayed(), true);
     }
+
 }
