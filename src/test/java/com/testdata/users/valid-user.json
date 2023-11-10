@@ -2,7 +2,7 @@
   "gender": "m",
   "fName": "Cy",
   "lName": "Ng",
-  "email": "is@valid.com",
+  "email": "this@willbeignored.com",
   "password": "5char",
   "dateOfBirth": 1,
   "monthOfBirth": "January",

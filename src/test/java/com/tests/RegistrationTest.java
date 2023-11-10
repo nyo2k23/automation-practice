@@ -6,6 +6,7 @@ import com.cta.pages.RegistrationPage;
 import com.cta.pages.SignInPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.utils.Constants;
+import com.utils.RandomStringGenerator;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -120,7 +121,9 @@ public class RegistrationTest extends BaseTest{
     public void validRegistrationTest() throws IOException {
         File file = new File("src/test/java/com/testdata/users/valid-user.json");
         User user = objectMapper.readValue(file, User.class);
-        signInPage.enterEmail(user.email());
+        RandomStringGenerator randomStringGenerator = new RandomStringGenerator();
+        String randomEmail = randomStringGenerator.generateEmail();
+        signInPage.enterEmail(randomEmail);
         signInPage.submitEmailToBeginRegistration();
         Assert.assertEquals(registrationPage.registrationFormIsPresent(), true);
         registrationPage.enterUserDetails(
