@@ -2,6 +2,7 @@ package com.tests;
 
 import com.cta.models.User;
 import com.cta.pages.AccountPage;
+import com.cta.pages.CheckOutPage;
 import com.cta.pages.HomePage;
 import com.cta.pages.products.DressesPage;
 import com.cta.pages.SignInPage;
@@ -14,21 +15,22 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 
-public class PurchaseTests extends BaseTest
-{
+public class PurchaseTests extends BaseTest {
     private HomePage homePage;
     private SignInPage signInPage;
     private DressesPage dressesPage;
     private AccountPage accountPage;
+    private CheckOutPage checkOutPage;
     private ObjectMapper objectMapper;
 
 
     @BeforeTest
-    public void setLoginPage(){
+    public void setLoginPage() {
         this.homePage = new HomePage(driver);
         this.signInPage = new SignInPage(driver);
         this.dressesPage = new DressesPage(driver);
         this.accountPage = new AccountPage(driver);
+        this.checkOutPage = new CheckOutPage(driver);
         objectMapper = new ObjectMapper();
         homePage.goTo("http://www.automationpractice.pl/index.php");
         signInPage.goTo();
@@ -65,5 +67,14 @@ public class PurchaseTests extends BaseTest
         Assert.assertEquals(
                 dressesPage.getCheckoutPageTitle().toLowerCase().stripLeading(),
                 Constants.CHECKOUT_PAGE_TITLE.toLowerCase());
+
+        Assert.assertEquals(
+                checkOutPage.getPageTitle().toLowerCase().stripLeading(),
+                Constants.CHECKOUT_PAGE_TITLE.toLowerCase()
+        );
+
+        Assert.assertEquals(checkOutPage.numberOfItemsInCart(), 1);
+
+        Assert.assertEquals(checkOutPage.getCartItemInfoForCartWithASingleProduct(), Constants.SUMMER_DRESS_CART_INFO);
     }
 }

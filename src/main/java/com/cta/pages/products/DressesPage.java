@@ -49,7 +49,7 @@ public class DressesPage extends BasePage {
     @FindBy(css = "#center_column div.pb-center-column h1")
     private WebElement productPageTitle;
 
-    @FindBy(css = "#layer_cart div.clearfix div.layer_cart_product h2")
+    @FindBy(css = ".layer_cart_product h2")
     private WebElement cartSubHeading;
 
     @FindBy(css = "a[title='Proceed to checkout']")
@@ -107,6 +107,7 @@ public class DressesPage extends BasePage {
         selectSize();
         selectQuantity();
         addToCartBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(proceedToCheckoutBtn));
     }
 
     public void goToCheckout(){
