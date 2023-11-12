@@ -3,9 +3,8 @@ package com.cta.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -16,6 +15,9 @@ public class CheckOutPage extends BasePage{
 
     @FindBy(css = "#cart_summary tbody")
     private List<WebElement> cartItems;
+
+    @FindBy(css = ".cart_navigation > a.button")
+    private WebElement proceedToCheckOutBtn;
 
 
 
@@ -40,6 +42,11 @@ public class CheckOutPage extends BasePage{
 //                }
 //        );
         return cartItem.findElement(By.cssSelector("td.cart_description > small:nth-child(3) > a")).getText();
+    }
+
+    public void proceedToCheckout(){
+        proceedToCheckOutBtn.click();
+        wait.until(ExpectedConditions.invisibilityOf(proceedToCheckOutBtn));
     }
 
 }

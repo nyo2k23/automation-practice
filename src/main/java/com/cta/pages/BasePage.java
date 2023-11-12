@@ -21,6 +21,5 @@ public abstract class BasePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         PageFactory.initElements(driver, this);
     }
-    //public abstract void goTo();
 
 }

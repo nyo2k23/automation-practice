@@ -1,11 +1,8 @@
 package com.tests;
 
 import com.cta.models.User;
-import com.cta.pages.AccountPage;
-import com.cta.pages.CheckOutPage;
-import com.cta.pages.HomePage;
+import com.cta.pages.*;
 import com.cta.pages.products.DressesPage;
-import com.cta.pages.SignInPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.utils.Constants;
 import org.testng.Assert;
@@ -21,6 +18,7 @@ public class PurchaseTests extends BaseTest {
     private DressesPage dressesPage;
     private AccountPage accountPage;
     private CheckOutPage checkOutPage;
+    private AddressFormPage addressFormPage;
     private ObjectMapper objectMapper;
 
 
@@ -31,6 +29,7 @@ public class PurchaseTests extends BaseTest {
         this.dressesPage = new DressesPage(driver);
         this.accountPage = new AccountPage(driver);
         this.checkOutPage = new CheckOutPage(driver);
+        this.addressFormPage = new AddressFormPage((driver));
         objectMapper = new ObjectMapper();
         homePage.goTo("http://www.automationpractice.pl/index.php");
         signInPage.goTo();
@@ -76,5 +75,11 @@ public class PurchaseTests extends BaseTest {
         Assert.assertEquals(checkOutPage.numberOfItemsInCart(), 1);
 
         Assert.assertEquals(checkOutPage.getCartItemInfoForCartWithASingleProduct(), Constants.SUMMER_DRESS_CART_INFO);
+
+        checkOutPage.proceedToCheckout();
+        Assert.assertEquals(addressFormPage.isCurrentlyOpen(), true);
+
+
+
     }
 }
