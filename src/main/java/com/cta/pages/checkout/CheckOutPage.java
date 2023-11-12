@@ -1,5 +1,6 @@
-package com.cta.pages;
+package com.cta.pages.checkout;
 
+import com.cta.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
-public class CheckOutPage extends BasePage{
+public class CheckOutPage extends BasePage {
 
     @FindBy(className = "breadcrumb")
     private WebElement checkoutPageTitle; // " > Your shopping cart"
@@ -20,6 +21,17 @@ public class CheckOutPage extends BasePage{
     private WebElement proceedToCheckOutBtn;
 
 
+    @FindBy(id = "carrier_area")
+    private WebElement shippingStageSubHeading;
+
+    @FindBy(id = "cgv")
+    private WebElement termsCheckBox;
+
+    @FindBy(css = "checker > span.checked")
+    private WebElement checkBoxStatus;
+
+    @FindBy(css = "button [name='processCarrier']")
+    private WebElement processCarrierBtn;
 
 
     public CheckOutPage(WebDriver driver) {
@@ -48,6 +60,27 @@ public class CheckOutPage extends BasePage{
         proceedToCheckOutBtn.click();
         wait.until(ExpectedConditions.invisibilityOf(proceedToCheckOutBtn));
     }
+
+
+
+    public String getPageSubHeading(){
+        return shippingStageSubHeading.getText();
+    }
+
+    public boolean termsChecked(){
+        if(checkBoxStatus.isDisplayed()) return true;
+        return false;
+    }
+
+    public void agreeToTerms(){
+        termsCheckBox.click();
+    }
+
+    public void submitCarrier(){
+        processCarrierBtn.click();
+        wait.until(ExpectedConditions.invisibilityOf(shippingStageSubHeading));
+    }
+
 
 }
 

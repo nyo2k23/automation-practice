@@ -1,4 +1,4 @@
-package com.utils;
+package com.cta.utils;
 
 import org.apache.commons.lang3.RandomStringUtils;
 

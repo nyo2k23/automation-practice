@@ -1,4 +1,4 @@
-package com.utils;
+package com.cta.utils;
 
 public class Constants {
     public static final String F_NAME_REQUIRED_ERROR_MSG = "firstname is required.";
@@ -19,5 +19,5 @@ public class Constants {
     public static final String SUCCESSFULLY_ADDED_TO_CART_MSG = "Product successfully added to your shopping cart";
     public static final String CHECKOUT_PAGE_TITLE = "> Your shopping cart";
     public static final String SUMMER_DRESS_CART_INFO = "Size : M, Color : Blue";
-
+    public static final String ORDER_SHIPPING_PAGE_TITLE = "SHIPPING:";
 }

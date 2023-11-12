@@ -1,10 +1,12 @@
-package com.tests;
+package com.cta.tests;
 
+import com.cta.models.AddressForm;
 import com.cta.models.User;
 import com.cta.pages.*;
+import com.cta.pages.checkout.CheckOutPage;
 import com.cta.pages.products.DressesPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.utils.Constants;
+import com.cta.utils.Constants;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -36,8 +38,8 @@ public class PurchaseTests extends BaseTest {
     }
 
     @Test
-    public void purchaseDressTest() throws IOException {
-        File file = new File("src/test/java/com/testdata/users/valid-user-login.json");
+    public void purchaseDressTestNoAddressSaved() throws IOException {
+        File file = new File("src/test/java/com/cta/testdata/users/valid-user-login.json");
         User user = objectMapper.readValue(file, User.class);
         signInPage.enterLoginDetails(user.email(), user.password());
         signInPage.submitLogin();
@@ -77,9 +79,28 @@ public class PurchaseTests extends BaseTest {
         Assert.assertEquals(checkOutPage.getCartItemInfoForCartWithASingleProduct(), Constants.SUMMER_DRESS_CART_INFO);
 
         checkOutPage.proceedToCheckout();
+
+
+        File addressFile = new File("src/test/java/com/cta/testdata/users/valid-user.json");
+        AddressForm address = objectMapper.readValue(file, AddressForm.class);
         Assert.assertEquals(addressFormPage.isCurrentlyOpen(), true);
+        addressFormPage.addAddressDetails(
+                address.address1(),
+                address.id_state(),
+                address.postcode(),
+                address.phone(),
+                address.phone_mobile()
+        );
+        addressFormPage.submitForm();
+        Assert.assertEquals(addressFormPage.isCorrectAddressInfo(address), true);
+        addressFormPage.processAddress();
+        Assert.assertEquals(
+                checkOutPage.getPageSubHeading().toLowerCase(),
+                Constants.ORDER_SHIPPING_PAGE_TITLE.toLowerCase()
+        );
+        checkOutPage.agreeToTerms();
+        Assert.assertEquals(checkOutPage.termsChecked(), true);
+        checkOutPage.submitCarrier();
 
-
-
-    }
+            }
 }

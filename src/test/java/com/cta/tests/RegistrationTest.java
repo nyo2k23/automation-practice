@@ -1,12 +1,12 @@
-package com.tests;
+package com.cta.tests;
 
 import com.cta.models.User;
 import com.cta.pages.HomePage;
 import com.cta.pages.RegistrationPage;
 import com.cta.pages.SignInPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.utils.Constants;
-import com.utils.RandomStringGenerator;
+import com.cta.utils.Constants;
+import com.cta.utils.RandomStringGenerator;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -37,7 +37,7 @@ public class RegistrationTest extends BaseTest{
 
     @Test
     public void invalidRegistrationTest1() throws IOException {
-        File file = new File("src/test/java/com/testdata/users/invalid-user-no-fname.json");
+        File file = new File("src/test/java/com/cta/testdata/users/invalid-user-no-fname.json");
         User user = objectMapper.readValue(file, User.class);
         signInPage.enterEmailToRegister(user.email());
         signInPage.submitEmailToBeginRegistration();
@@ -57,7 +57,7 @@ public class RegistrationTest extends BaseTest{
 
     @Test
     public void invalidRegistrationTest2() throws IOException {
-        File file = new File("src/test/java/com/testdata/users/invalid-user-fname-max-len.json");
+        File file = new File("src/test/java/com/cta/testdata/users/invalid-user-fname-max-len.json");
         User user = objectMapper.readValue(file, User.class);
         signInPage.enterEmailToRegister(user.email());
         signInPage.submitEmailToBeginRegistration();
@@ -78,7 +78,7 @@ public class RegistrationTest extends BaseTest{
 
     @Test
     public void invalidRegistrationTest3() throws IOException {
-        File file = new File("src/test/java/com/testdata/users/invalid-user-pwd-max-len.json");
+        File file = new File("src/test/java/com/cta/testdata/users/invalid-user-pwd-max-len.json");
         User user = objectMapper.readValue(file, User.class);
         signInPage.enterEmailToRegister(user.email());
         signInPage.submitEmailToBeginRegistration();
@@ -98,7 +98,7 @@ public class RegistrationTest extends BaseTest{
 
     @Test
     public void invalidRegistrationTest4() throws IOException {
-        File file = new File("src/test/java/com/testdata/users/invalid-user-no-pwd.json");
+        File file = new File("src/test/java/com/cta/testdata/users/invalid-user-no-pwd.json");
         User user = objectMapper.readValue(file, User.class);
         signInPage.enterEmailToRegister(user.email());
         signInPage.submitEmailToBeginRegistration();
@@ -119,7 +119,7 @@ public class RegistrationTest extends BaseTest{
 
     @Test
     public void validRegistrationTest() throws IOException {
-        File file = new File("src/test/java/com/testdata/users/valid-user.json");
+        File file = new File("src/test/java/com/cta/testdata/users/valid-user.json");
         User user = objectMapper.readValue(file, User.class);
         RandomStringGenerator randomStringGenerator = new RandomStringGenerator();
         String randomEmail = randomStringGenerator.generateEmail();

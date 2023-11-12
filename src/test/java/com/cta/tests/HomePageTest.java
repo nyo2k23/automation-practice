@@ -1,4 +1,4 @@
-package com.tests;
+package com.cta.tests;
 
 import com.cta.pages.HomePage;
 import org.testng.Assert;

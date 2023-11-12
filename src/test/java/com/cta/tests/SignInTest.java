@@ -1,4 +1,4 @@
-package com.tests;
+package com.cta.tests;
 
 import com.cta.models.User;
 import com.cta.pages.AccountPage;
@@ -6,7 +6,7 @@ import com.cta.pages.HomePage;
 import com.cta.pages.RegistrationPage;
 import com.cta.pages.SignInPage;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.utils.Constants;
+import com.cta.utils.Constants;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -86,7 +86,7 @@ public class SignInTest extends BaseTest{
 
     @Test
     public void successfulLogin() throws IOException {
-        File file = new File("src/test/java/com/testdata/users/valid-user-login.json");
+        File file = new File("src/test/java/com/cta/testdata/users/valid-user-login.json");
         User user = objectMapper.readValue(file, User.class);
         signInPage.enterLoginDetails(user.email(), user.password());
         signInPage.submitLogin();
