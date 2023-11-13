@@ -122,7 +122,7 @@ public class RegistrationTest extends BaseTest{
         File file = new File("src/test/java/com/cta/testdata/users/valid-user.json");
         User user = objectMapper.readValue(file, User.class);
         RandomStringGenerator randomStringGenerator = new RandomStringGenerator();
-        String randomEmail = randomStringGenerator.generateEmail();
+        String randomEmail = randomStringGenerator.generateValidEmail();
         signInPage.enterEmailToRegister(randomEmail);
         signInPage.submitEmailToBeginRegistration();
         Assert.assertEquals(registrationPage.registrationFormIsPresent(), true);

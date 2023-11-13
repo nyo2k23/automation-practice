@@ -27,5 +27,8 @@ public class Constants {
     public static final String CHEQUE_OPTION_CONFIRMATION = "Check payment";
     public static final String ORDER_SUCCESS_MSG = "Your order on My Shop is complete.";
 
+    public static final String TSHIRT_PAGE_HEADING = "T-shirts";
+    public static final String TSHIRT_TO_BE_BOUGHT = "Faded Short Sleeve T-shirts";
+
 
 }
