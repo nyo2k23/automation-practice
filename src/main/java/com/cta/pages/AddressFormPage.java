@@ -1,7 +1,6 @@
 package com.cta.pages;
 
 import com.cta.models.AddressForm;
-import com.cta.utils.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,16 +36,16 @@ public class AddressFormPage extends BasePage {
     @FindBy(id = "submitAddress")
     private WebElement submitBtn;
 
-    @FindBy(css = "address_address1 address_address2")
+    @FindBy(css = "#address_delivery > .address_address1.address_address2")
     private WebElement savedAddress;
 
-    @FindBy(css = "address_city address_state_name address_postcode")
+    @FindBy(css = "#address_delivery > .address_city.address_state_name.address_postcode")
     private WebElement savedCityStatePostCode;
 
-    @FindBy(className = "address_phone")
+    @FindBy(css = "#address_delivery > .address_phone")
     private WebElement savedPhone;
 
-    @FindBy(className = "address_phone_mobile")
+    @FindBy(css = "#address_delivery > .address_phone_mobile")
     private WebElement savedMobilePhone;
 //    {
 //        "address1": "200 Address Line",
@@ -59,26 +58,23 @@ public class AddressFormPage extends BasePage {
     @FindBy(css = "button[name='processAddress'")
     private WebElement processAddressBtn;
 
+    public final String ADDRESS_PAGE_SUB_HEADING = "YOUR ADDRESSES";
+
 
 
     public boolean isCurrentlyOpen() {
         return (
-                pageSubHeading.isDisplayed() && pageSubHeading.getText().equalsIgnoreCase(Constants.ADDRESS_PAGE_SUB_HEADING)
+                pageSubHeading.isDisplayed() && pageSubHeading.getText().equalsIgnoreCase(ADDRESS_PAGE_SUB_HEADING)
         );
     }
 
-    public void addAddressDetails(
-            String addressLine1,
-            String state,
-            String postCode,
-            String phoneNumber,
-            String mobileNumber
-    ) {
-        addressInputField.sendKeys(addressLine1);
-        stateInputField.sendKeys(state);
-        postCodeInputField.sendKeys(postCode);
-        phoneInputField.sendKeys(phoneNumber);
-        mobilePhoneInputField.sendKeys(mobileNumber);
+    public void addAddressDetails(AddressForm address) {
+        addressInputField.sendKeys(address.address1());
+        cityInputField.sendKeys(address.city());
+        stateInputField.sendKeys(address.id_state());
+        postCodeInputField.sendKeys(address.postcode());
+        phoneInputField.sendKeys(address.phone());
+        mobilePhoneInputField.sendKeys(address.phone_mobile());
 
     }
 

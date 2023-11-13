@@ -21,18 +21,32 @@ public class CheckOutPage extends BasePage {
     private WebElement proceedToCheckOutBtn;
 
 
-    @FindBy(id = "carrier_area")
+    @FindBy(css = "h1.page-heading")
     private WebElement shippingStageSubHeading;
 
     @FindBy(id = "cgv")
     private WebElement termsCheckBox;
 
-    @FindBy(css = "checker > span.checked")
+    @FindBy(css = ".checker > span.checked")
     private WebElement checkBoxStatus;
 
-    @FindBy(css = "button [name='processCarrier']")
+    @FindBy(css = "button[name='processCarrier']")
     private WebElement processCarrierBtn;
 
+    @FindBy(css = "a.bankwire")
+    private WebElement payByBankWire;
+
+    @FindBy(css = "a.cheque")
+    private WebElement payByCheque;
+
+    @FindBy(css = "h3.page-subheading")
+    private WebElement paymentOptionConfirmationSubHeading;
+
+    @FindBy(css = "#cart_navigation > button")
+    private WebElement confirmOrder;
+
+    @FindBy(css = "p.alert.alert-success")
+    private WebElement orderSuccessMsg;
 
     public CheckOutPage(WebDriver driver) {
         super(driver);
@@ -74,13 +88,36 @@ public class CheckOutPage extends BasePage {
 
     public void agreeToTerms(){
         termsCheckBox.click();
+        wait.until(ExpectedConditions.visibilityOf(checkBoxStatus));
     }
 
     public void submitCarrier(){
         processCarrierBtn.click();
-        wait.until(ExpectedConditions.invisibilityOf(shippingStageSubHeading));
+        wait.until(ExpectedConditions.invisibilityOf(processCarrierBtn));
     }
 
+    public void clickPayByBankWire(){
+        payByBankWire.click();
+        wait.until(ExpectedConditions.invisibilityOf(payByBankWire));
 
+    }
+
+    public void clickPayByCheque() {
+        payByCheque.click();
+        wait.until(ExpectedConditions.invisibilityOf(payByCheque));
+    }
+
+    public String getPaymentOptionConfirmation(){
+        return paymentOptionConfirmationSubHeading.getText().toLowerCase();
+    }
+
+    public void submitOrder(){
+        confirmOrder.click();
+        wait.until(ExpectedConditions.invisibilityOf(confirmOrder));
+    }
+
+    public String getOrderSuccessMsg(){
+        return orderSuccessMsg.getText().strip().toLowerCase();
+    }
 }
 

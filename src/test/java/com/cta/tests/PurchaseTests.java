@@ -5,8 +5,8 @@ import com.cta.models.User;
 import com.cta.pages.*;
 import com.cta.pages.checkout.CheckOutPage;
 import com.cta.pages.products.DressesPage;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.cta.utils.Constants;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -49,7 +49,7 @@ public class PurchaseTests extends BaseTest {
         dressesPage.goTo();
         Assert.assertEquals(
                 dressesPage.getTitleOfCatalog().toLowerCase().stripTrailing(),
-                Constants.DRESSES_PAGE_TITLE.toLowerCase()
+                Constants.DRESSES_PAGE_SUB_HEADING.toLowerCase()
         );
         dressesPage.selectDressFromCatalog();
 
@@ -67,11 +67,12 @@ public class PurchaseTests extends BaseTest {
         dressesPage.goToCheckout();
         Assert.assertEquals(
                 dressesPage.getCheckoutPageTitle().toLowerCase().stripLeading(),
-                Constants.CHECKOUT_PAGE_TITLE.toLowerCase());
+                Constants.CHECKOUT_PAGE_SUB_HEADING.toLowerCase()
+        );
 
         Assert.assertEquals(
                 checkOutPage.getPageTitle().toLowerCase().stripLeading(),
-                Constants.CHECKOUT_PAGE_TITLE.toLowerCase()
+                Constants.CHECKOUT_PAGE_SUB_HEADING.toLowerCase()
         );
 
         Assert.assertEquals(checkOutPage.numberOfItemsInCart(), 1);
@@ -80,27 +81,34 @@ public class PurchaseTests extends BaseTest {
 
         checkOutPage.proceedToCheckout();
 
+        //  Move to another method no address saved & remove if statement keep code inside
+        File addressFile = new File("src/test/java/com/cta/testdata/addresses/valid-user-address-data.json");
+        AddressForm address = objectMapper.readValue(addressFile, AddressForm.class);
+        if(driver.getTitle().equalsIgnoreCase(Constants.ADDRESS_FORM_PAGE_TITLE)) {
 
-        File addressFile = new File("src/test/java/com/cta/testdata/users/valid-user.json");
-        AddressForm address = objectMapper.readValue(file, AddressForm.class);
-        Assert.assertEquals(addressFormPage.isCurrentlyOpen(), true);
-        addressFormPage.addAddressDetails(
-                address.address1(),
-                address.id_state(),
-                address.postcode(),
-                address.phone(),
-                address.phone_mobile()
-        );
-        addressFormPage.submitForm();
-        Assert.assertEquals(addressFormPage.isCorrectAddressInfo(address), true);
-        addressFormPage.processAddress();
-        Assert.assertEquals(
-                checkOutPage.getPageSubHeading().toLowerCase(),
-                Constants.ORDER_SHIPPING_PAGE_TITLE.toLowerCase()
-        );
+            Assert.assertEquals(addressFormPage.isCurrentlyOpen(), true);
+            addressFormPage.addAddressDetails(address);
+            addressFormPage.submitForm();
+        }
+            Assert.assertEquals(addressFormPage.isCorrectAddressInfo(address), true);
+            addressFormPage.processAddress();
+            Assert.assertEquals(
+                    checkOutPage.getPageSubHeading().toLowerCase(),
+                    Constants.ORDER_SHIPPING_PAGE_SUB_HEADING.toLowerCase()
+            );
+
         checkOutPage.agreeToTerms();
         Assert.assertEquals(checkOutPage.termsChecked(), true);
         checkOutPage.submitCarrier();
-
+        checkOutPage.clickPayByBankWire();
+        Assert.assertEquals(
+                checkOutPage.getPaymentOptionConfirmation(),
+                Constants.BANKWIRE_OPTION_CONFIRMATION.toLowerCase()
+        );
+        checkOutPage.submitOrder();
+        Assert.assertEquals(
+                checkOutPage.getOrderSuccessMsg(),
+                Constants.ORDER_SUCCESS_MSG.toLowerCase()
+        );
             }
 }
