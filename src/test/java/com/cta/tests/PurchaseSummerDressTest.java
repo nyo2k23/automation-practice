@@ -65,17 +65,17 @@ public class PurchaseSummerDressTest extends BaseTest {
         );
 
         dressesPage.goToCheckout();
-        Assert.assertEquals(
-                dressesPage.getCheckoutPageTitle().toLowerCase().stripLeading(),
-                Constants.CHECKOUT_PAGE_SUB_HEADING.toLowerCase()
-        );
+//        Assert.assertEquals(
+//                dressesPage.getCheckoutPageTitle().toLowerCase().stripLeading(),
+//                Constants.SHOPPING_CART_PAGE_SUB_HEADING.toLowerCase()
+//        );
 
         Assert.assertEquals(
-                checkOutPage.getPageTitle().toLowerCase().stripLeading(),
-                Constants.CHECKOUT_PAGE_SUB_HEADING.toLowerCase()
+                checkOutPage.getPageTitle(),
+                Constants.SHOPPING_CART_PAGE_SUB_HEADING.toLowerCase()
         );
 
-        Assert.assertEquals(checkOutPage.numberOfItemsInCart(), 4);  // somehow passed with 1
+        Assert.assertEquals(checkOutPage.numberOfItemsInCart(), 4);
 
         Assert.assertEquals(checkOutPage.getCartItemInfoForCartWithASingleProduct(), Constants.SUMMER_DRESS_CART_INFO);
 
@@ -110,5 +110,5 @@ public class PurchaseSummerDressTest extends BaseTest {
                 checkOutPage.getOrderSuccessMsg(),
                 Constants.ORDER_SUCCESS_MSG.toLowerCase()
         );
-            }
+    }
 }

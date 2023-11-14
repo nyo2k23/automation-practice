@@ -76,18 +76,18 @@ public class TshirtsPage extends BasePage {
     }
 
 
-    public void selectOrangeShirt(){
+    private void selectOrangeShirt(){
         orangeColourCheckBox.click();
     }
 
-    public void selectSize(){
+    private void selectSize(){
         Select dressSizeSelection = new Select(size);
         dressSizeSelection.selectByVisibleText("M");
     }
 
-    public void selectQuantity() {
+    private void selectQuantity() {
         quantity.clear();
-        quantity.sendKeys("1");
+        quantity.sendKeys("4");
     }
 
     public void addProductToCart() {

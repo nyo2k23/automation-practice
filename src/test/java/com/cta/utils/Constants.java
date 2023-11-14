@@ -18,8 +18,10 @@ public class Constants {
 
     public static final String SUCCESSFULLY_ADDED_TO_CART_MSG = "Product successfully added to your shopping cart";
 
-    public static final String CHECKOUT_PAGE_SUB_HEADING = "> Your shopping cart";
+    public static final String SHOPPING_CART_PAGE_SUB_HEADING = "> Your shopping cart";
     public static final String SUMMER_DRESS_CART_INFO = "Size : M, Color : Blue";
+    public static final String TSHIRT_CART_INFO = "Size : M, Color : Orange";
+
     public static final String ORDER_SHIPPING_PAGE_SUB_HEADING = "SHIPPING:";
 
     public static final String ADDRESS_FORM_PAGE_TITLE = "Address - My Shop";

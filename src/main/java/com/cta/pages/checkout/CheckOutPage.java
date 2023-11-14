@@ -12,7 +12,7 @@ import java.util.List;
 public class CheckOutPage extends BasePage {
 
     @FindBy(className = "breadcrumb")
-    private WebElement checkoutPageTitle; // " > Your shopping cart"
+    private WebElement shoppingCartSubHeading; // " > Your shopping cart"
 
     @FindBy(css = "#cart_summary tbody")
     private List<WebElement> cartItems;
@@ -53,11 +53,10 @@ public class CheckOutPage extends BasePage {
     }
 
     public String getPageTitle(){
-        return checkoutPageTitle.getText();
+        return shoppingCartSubHeading.getText();
     }
 
     public int numberOfItemsInCart(){
-        //List<WebElement> items = driver.findElements(By.cssSelector("tr.cart_item"));
         return cartItems.size();
     }
 
@@ -78,7 +77,7 @@ public class CheckOutPage extends BasePage {
 
 
     public String getPageSubHeading(){
-        return shippingStageSubHeading.getText();
+        return shippingStageSubHeading.getText().toLowerCase().strip();
     }
 
     public boolean termsChecked(){
