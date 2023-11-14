@@ -138,11 +138,9 @@ public class RegistrationTest extends BaseTest{
         registrationPage.submitUserDetails();
         Assert.assertEquals(registrationPage.getRegistrationSuccessMsg(), Constants.ACCOUNT_CREATION_SUCCESS_MSG);
         Assert.assertEquals(registrationPage.getNameOfRegisteredUser(), user.fName() + " " + user.lName());
-
     }
 
     @Test(dependsOnMethods = "validRegistrationTest")
     public void validLoginTest(){
-
     }
 }

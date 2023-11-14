@@ -9,12 +9,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 public class TshirtsPage extends BasePage {
-    public TshirtsPage(WebDriver driver) {
-        super(driver);
-    }
 
-    private final String THSIRTS_PAGE_HEADING = "T-shirts ";
-    @FindBy(css = "a[title='T-shirts']")
+    private final String THSIRTS_PAGE_HEADING = "T-SHIRTS ";
+    private final String TSHIRTS_PAGE_TITLE = "T-shirts - My Shop";
+
+    @FindBy(css = "#block_top_menu > ul > li:nth-child(3)")
     private WebElement tShirtsCatalogPortal;
 
     @FindBy(css = "h1.page-heading span.cat-name")
@@ -26,7 +25,7 @@ public class TshirtsPage extends BasePage {
     @FindBy(css = "a.quick-view")
     private WebElement quickViewPortal;
 
-    @FindBy(css = "h1[itemprop='name']")
+    @FindBy(tagName = "h1")
     private WebElement quickViewFrameHeading;
 
     // the following 6 elems are the same for product catalogs
@@ -48,39 +47,41 @@ public class TshirtsPage extends BasePage {
     @FindBy(css = ".layer_cart_product h2")
     private WebElement cartSubHeading;
 
-
-    public void goTo(){
-        tShirtsCatalogPortal.click();
-        wait.until(ExpectedConditions.textToBePresentInElementValue(
-                pageHeading,
-                THSIRTS_PAGE_HEADING));
+    public TshirtsPage(WebDriver driver) {
+        super(driver);
     }
 
-    public void hoverOverTshirt(){
+    public void goTo() {
+        wait.until(ExpectedConditions.visibilityOf(tShirtsCatalogPortal));
+        tShirtsCatalogPortal.click();
+        wait.until(ExpectedConditions.titleIs(TSHIRTS_PAGE_TITLE));
+    }
+
+    public void hoverOverTshirt() {
         Actions action = new Actions(driver);
-        action.moveToElement(tShirtsCatalogPortal);
+        action.moveToElement(tShirtToBePurchased).build().perform();
         wait.until(ExpectedConditions.visibilityOf(quickViewPortal));
     }
 
-    public String getPageHeading(){
+    public String getPageHeading() {
         return pageHeading.getText().toLowerCase().strip();
     }
 
-    public void clickQuickView(){
+    public void clickQuickView() {
         quickViewPortal.click();
-        wait.until(ExpectedConditions.visibilityOf(quickViewFrameHeading));
+        wait.until(ExpectedConditions.visibilityOf(addToCartBtn));
     }
 
-    public String getQuickViewFrameHeading(){
+    public String getQuickViewFrameHeading() {
         return quickViewPortal.getText().toLowerCase().strip();
     }
 
 
-    private void selectOrangeShirt(){
+    private void selectOrangeShirt() {
         orangeColourCheckBox.click();
     }
 
-    private void selectSize(){
+    private void selectSize() {
         Select dressSizeSelection = new Select(size);
         dressSizeSelection.selectByVisibleText("M");
     }
@@ -96,15 +97,14 @@ public class TshirtsPage extends BasePage {
         selectQuantity();
         addToCartBtn.click();
         wait.until(ExpectedConditions.visibilityOf(proceedToCheckoutBtn));
-
     }
 
-    public void goToCheckout(){
+    public void goToCheckout() {
         proceedToCheckoutBtn.click();
         wait.until(ExpectedConditions.invisibilityOf(proceedToCheckoutBtn));
     }
 
-    public String cartSuccessMsg(){
+    public String cartSuccessMsg() {
         return this.cartSubHeading.getText();
     }
 }

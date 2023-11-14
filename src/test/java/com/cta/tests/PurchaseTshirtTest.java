@@ -50,7 +50,7 @@ public class PurchaseTshirtTest extends BaseTest{
                 accountPage.getNameOfRegisteredUser(), user.fName() + " " + user.lName()
         );
         tshirtsPage.goTo();
-        Assert.assertEquals(tshirtsPage.getPageHeading(), Constants.TSHIRT_PAGE_HEADING);
+        Assert.assertEquals(tshirtsPage.getPageHeading(), Constants.TSHIRT_PAGE_HEADING.toLowerCase());
         tshirtsPage.hoverOverTshirt();
         tshirtsPage.clickQuickView();
         Assert.assertEquals(
@@ -77,7 +77,6 @@ public class PurchaseTshirtTest extends BaseTest{
         File addressFile = new File("src/test/java/com/cta/testdata/addresses/valid-user-address-data.json");
         AddressForm address = objectMapper.readValue(addressFile, AddressForm.class);
         if(driver.getTitle().equalsIgnoreCase(Constants.ADDRESS_FORM_PAGE_TITLE)) {
-
             Assert.assertEquals(addressFormPage.isCurrentlyOpen(), true);
             addressFormPage.addAddressDetails(address);
             addressFormPage.submitForm();

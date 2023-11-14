@@ -47,20 +47,11 @@ public class AddressFormPage extends BasePage {
 
     @FindBy(css = "#address_delivery > .address_phone_mobile")
     private WebElement savedMobilePhone;
-//    {
-//        "address1": "200 Address Line",
-//            "city": "Ashley",
-//            "id_state": "Ohio",
-//            "postcode": "43003",
-//            "phone": "020248202",
-//            "phone_mobile": "02943022020"
-//    }
+
     @FindBy(css = "button[name='processAddress'")
     private WebElement processAddressBtn;
 
     public final String ADDRESS_PAGE_SUB_HEADING = "YOUR ADDRESSES";
-
-
 
     public boolean isCurrentlyOpen() {
         return (
@@ -75,7 +66,6 @@ public class AddressFormPage extends BasePage {
         postCodeInputField.sendKeys(address.postcode());
         phoneInputField.sendKeys(address.phone());
         mobilePhoneInputField.sendKeys(address.phone_mobile());
-
     }
 
     public void submitForm() {

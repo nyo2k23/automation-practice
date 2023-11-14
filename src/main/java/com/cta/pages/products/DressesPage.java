@@ -3,7 +3,6 @@ package com.cta.pages.products;
 import com.cta.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -13,12 +12,6 @@ public class DressesPage extends BasePage {
     @FindBy(id = "layered_block_left > p")
     private WebElement titleBlock;  // getText() == Catalog
 
-//    @FindBy(id = "layered_id_attribute_group_14")
-//    private WebElement blueColorCheckBox;
-
-//    @FindBy(id = "layered_id_attribute_group_2")
-//    private WebElement sizeMCheckBox;
-
     @FindBy(css = "#block_top_menu > ul > li:nth-child(2)")
     private WebElement dressCatalogPortal;
 
@@ -26,13 +19,13 @@ public class DressesPage extends BasePage {
     private WebElement printedDress;
 
     @FindBy(id = "group_1")
-    private WebElement dressSize;
+    private WebElement size;
 
     @FindBy(id = "quantity_wanted")
     private WebElement quantity;
 
     @FindBy(id = "color_14")
-    private WebElement dressColourCheckBox;
+    private WebElement blueColourCheckBox;
 
     @FindBy(css = "#add_to_cart button")
     private WebElement addToCartBtn;
@@ -56,53 +49,50 @@ public class DressesPage extends BasePage {
     private WebElement proceedToCheckoutBtn;
 
     @FindBy(className = "breadcrumb")
-    private WebElement checkoutPageTitle; // " > Your shopping cart"
+    private WebElement checkoutPageTitle;
 
-    public DressesPage(WebDriver driver){
+    public DressesPage(WebDriver driver) {
         super(driver);
     }
 
-    public void goTo(){
+    public void goTo() {
         wait.until(ExpectedConditions.visibilityOf(dressCatalogPortal));
         dressCatalogPortal.click();
         wait.until(ExpectedConditions.visibilityOf(catalogTitle));
     }
 
-    public String getTitleOfCatalog(){
+    public String getTitleOfCatalog() {
         return catalogTitle.getText();
     }
 
-    public String getCartProductTitle(){
+    public String getCartProductTitle() {
         return cartProductTitle.getText();
     }
 
-    public String getProductPageTitle(){
+    public String getProductPageTitle() {
         return productPageTitle.getText();
     }
-    public void selectDressFromCatalog(){
+
+    public void selectDressFromCatalog() {
         printedDress.click();
-        //Actions actions1 = new Actions(driver);
-        //actions1.moveToElement(cartLayer);
         wait.until(ExpectedConditions.visibilityOf(productPageTitle));
-        //wait.until(ExpectedConditions.);
-
     }
 
-    public void selectBlueDress(){
-        dressColourCheckBox.click();
+    public void selectBlueDress() {
+        blueColourCheckBox.click();
     }
 
-    public void selectSize(){
-        Select dressSizeSelection = new Select(dressSize);
+    public void selectSize() {
+        Select dressSizeSelection = new Select(size);
         dressSizeSelection.selectByVisibleText("M");
     }
 
-    public void selectQuantity(){
+    public void selectQuantity() {
         quantity.clear();
         quantity.sendKeys("4");
     }
 
-    public void addProductToCart(){
+    public void addProductToCart() {
         selectBlueDress();
         selectSize();
         selectQuantity();
@@ -110,18 +100,16 @@ public class DressesPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(proceedToCheckoutBtn));
     }
 
-    public void goToCheckout(){
+    public void goToCheckout() {
         proceedToCheckoutBtn.click();
         wait.until(ExpectedConditions.invisibilityOf(proceedToCheckoutBtn));
     }
 
-    public String getCheckoutPageTitle(){
+    public String getCheckoutPageTitle() {
         return checkoutPageTitle.getText();
     }
 
-    public String cartSuccessMsg(){
+    public String cartSuccessMsg() {
         return this.cartSubHeading.getText();
-        }
-
-    // driver.switchTo().alert().dismiss();
+    }
 }

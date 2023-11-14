@@ -13,7 +13,6 @@ public abstract class BasePage {
     protected final WebDriver driver;
     protected final WebDriverWait wait;
 
-    @FindBy(className = "a.logout")
     private WebElement logOutBtn;
 
     public BasePage(WebDriver driver) {

@@ -52,53 +52,46 @@ public class CheckOutPage extends BasePage {
         super(driver);
     }
 
-    public String getPageTitle(){
+    public String getPageTitle() {
         return shoppingCartSubHeading.getText();
     }
 
-    public int numberOfItemsInCart(){
+    public int numberOfItemsInCart() {
         return cartItems.size();
     }
 
     public String getCartItemInfoForCartWithASingleProduct() {
         WebElement cartItem = cartItems.get(0);
-//        cartItems.forEach(cartItem -> {
-//            cartItem.findElement(By.cssSelector("td.cart_description > small:nth-child(3) > a"));
-//                }
-//        );
         return cartItem.findElement(By.cssSelector("td.cart_description > small:nth-child(3) > a")).getText();
     }
 
-    public void proceedToCheckout(){
+    public void proceedToCheckout() {
         proceedToCheckOutBtn.click();
         wait.until(ExpectedConditions.invisibilityOf(proceedToCheckOutBtn));
     }
 
-
-
-    public String getPageSubHeading(){
+    public String getPageSubHeading() {
         return shippingStageSubHeading.getText().toLowerCase().strip();
     }
 
-    public boolean termsChecked(){
-        if(checkBoxStatus.isDisplayed()) return true;
+    public boolean termsChecked() {
+        if (checkBoxStatus.isDisplayed()) return true;
         return false;
     }
 
-    public void agreeToTerms(){
+    public void agreeToTerms() {
         termsCheckBox.click();
         wait.until(ExpectedConditions.visibilityOf(checkBoxStatus));
     }
 
-    public void submitCarrier(){
+    public void submitCarrier() {
         processCarrierBtn.click();
         wait.until(ExpectedConditions.invisibilityOf(processCarrierBtn));
     }
 
-    public void clickPayByBankWire(){
+    public void clickPayByBankWire() {
         payByBankWire.click();
         wait.until(ExpectedConditions.invisibilityOf(payByBankWire));
-
     }
 
     public void clickPayByCheque() {
@@ -106,16 +99,16 @@ public class CheckOutPage extends BasePage {
         wait.until(ExpectedConditions.invisibilityOf(payByCheque));
     }
 
-    public String getPaymentOptionConfirmation(){
+    public String getPaymentOptionConfirmation() {
         return paymentOptionConfirmationSubHeading.getText().toLowerCase();
     }
 
-    public void submitOrder(){
+    public void submitOrder() {
         confirmOrder.click();
         wait.until(ExpectedConditions.invisibilityOf(confirmOrder));
     }
 
-    public String getOrderSuccessMsg(){
+    public String getOrderSuccessMsg() {
         return orderSuccessMsg.getText().strip().toLowerCase();
     }
 }

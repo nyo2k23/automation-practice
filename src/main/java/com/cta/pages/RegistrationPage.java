@@ -50,10 +50,10 @@ public class RegistrationPage extends BasePage {
     @FindBy(className = "alert-success")
     private WebElement registrationSuccessAlert;
 
-    @FindBy (css = "#header div:nth-child(1) > a > span")
+    @FindBy(css = "#header div:nth-child(1) > a > span")
     private WebElement accountHolder;
 
-    @FindBy (className = "a.logout")
+    @FindBy(className = "a.logout")
     private WebElement logOutBtn;
 
     public RegistrationPage(WebDriver driver) {
@@ -96,7 +96,7 @@ public class RegistrationPage extends BasePage {
         birthYearSelection.selectByVisibleText(String.valueOf(yearOfBirth) + "  ");
     }
 
-    public void submitAccount(){
+    public void submitAccount() {
         submitBtn.click();
         wait.until(ExpectedConditions.or(
                 ExpectedConditions.visibilityOf(alertContainer),
@@ -105,23 +105,16 @@ public class RegistrationPage extends BasePage {
 
     }
 
-    public String getRegistrationSuccessMsg(){
+    public String getRegistrationSuccessMsg() {
         return registrationSuccessAlert.getText();
     }
 
-    public String getRegistrationErrorMsg(){
+    public String getRegistrationErrorMsg() {
         return alertErrorMsg.getText();
     }
 
-    public String getNameOfRegisteredUser(){
+    public String getNameOfRegisteredUser() {
         return accountHolder.getText();
     }
-    // alertContainer -->  text()
-    // firstname is too long. Maximum length: 32
-    //  firstname is required.
-    // lastname is too long. Maximum length: 32
-    // lastname is required.
-    // passwd is too long. Maximum length: 32
-    // passwd is invalid.
-    // email is invalid.
+
 }

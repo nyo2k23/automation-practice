@@ -20,7 +20,7 @@ public class SignInPage extends BasePage {
     private WebElement registerForm;  // get text = Create an account
 
     @FindBy(css = "#login_form h3")
-    private WebElement loginForm;  // get text = Already registered?
+    private WebElement loginForm;
 
     @FindBy(id = "email_create")
     private WebElement registerEmailInput;
@@ -48,7 +48,6 @@ public class SignInPage extends BasePage {
 
     @FindBy(id = "SubmitLogin")
     private WebElement submitLoginBtn;
-
 
     public SignInPage(WebDriver driver){
         super(driver);
@@ -84,7 +83,6 @@ public class SignInPage extends BasePage {
     public void enterLoginDetails(String email, String password){
         emailLoginField.sendKeys(email);
         passwordLoginField.sendKeys(password);
-
     }
 
     public void submitLogin(){
@@ -100,7 +98,6 @@ public class SignInPage extends BasePage {
     }
 
     public boolean isInvalidInput(){
-
         return registrationErrorMessageElem.isDisplayed();
     }
 
