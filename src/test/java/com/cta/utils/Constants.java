@@ -32,5 +32,8 @@ public class Constants {
     public static final String TSHIRT_PAGE_HEADING = "T-shirts";
     public static final String TSHIRT_TO_BE_BOUGHT = "Faded Short Sleeve T-shirts";
 
-
+    public static final String SEARCH_ERROR_MSG = "No results were found for your search \"hjhbh\"\n";
+    public static final String ERROR_SEARCH_RESULT_MSG = "0 results have been found.";
+    public static final String DRESS_SEARCH_RESULT_COUNT = "7 results have been found.";
+    public static final String SEARCH_RESULTS_PAGE_HEADING = "SEARCH";
 }

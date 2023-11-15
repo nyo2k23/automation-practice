@@ -4,14 +4,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public abstract class BasePage {
+public class BasePage {
 
     protected final WebDriver driver;
     protected final WebDriverWait wait;
+
+    @FindBy(id = "header_logo")
+    private WebElement siteLogo;
+
+    @FindBy(css = "i.icon-home")
+    private WebElement returnHomeIcon;
 
     private WebElement logOutBtn;
 
@@ -21,4 +28,8 @@ public abstract class BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    public void returnHome(){
+        siteLogo.click();
+        wait.until(ExpectedConditions.invisibilityOf(returnHomeIcon));
+    }
 }

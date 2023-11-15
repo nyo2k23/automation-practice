@@ -19,6 +19,9 @@ public class HomePage extends BasePage {
     @FindBy(className = "a.logout")
     private WebElement logOutBtn;
 
+    @FindBy(css = "i.icon-home")
+    private WebElement returnHomeIcon;
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -40,5 +43,9 @@ public class HomePage extends BasePage {
     public void logOut() {
         logOutBtn.click();
         wait.until(ExpectedConditions.invisibilityOf(logOutBtn));
+    }
+
+    public boolean isAt(){
+        return driver.getTitle().equalsIgnoreCase("My Shop");
     }
 }
