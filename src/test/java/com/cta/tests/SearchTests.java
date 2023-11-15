@@ -27,7 +27,7 @@ public class SearchTests extends BaseTest {
     @Test
     public void noResultSearchTest() {
         searchPage.search("jkak");
-        Assert.assertEquals(searchPage.getSearchResultCounterMsg(), Constants.SEARCH_ERROR_MSG);
+        Assert.assertEquals(searchPage.getSearchResultCounterMsg(), Constants.ERROR_SEARCH_RESULT_MSG);
     }
 
     @Test
