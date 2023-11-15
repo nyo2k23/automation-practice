@@ -75,7 +75,7 @@ public class PurchaseSummerDressTest extends BaseTest {
                 Constants.SHOPPING_CART_PAGE_SUB_HEADING.toLowerCase()
         );
 
-        Assert.assertEquals(checkOutPage.numberOfItemsInCart(), 4);
+        Assert.assertEquals(checkOutPage.numberOfItemsInCart(), 1);
 
         Assert.assertEquals(checkOutPage.getCartItemInfoForCartWithASingleProduct(), Constants.SUMMER_DRESS_CART_INFO);
 

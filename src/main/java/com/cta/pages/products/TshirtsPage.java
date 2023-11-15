@@ -12,6 +12,7 @@ public class TshirtsPage extends BasePage {
 
     private final String THSIRTS_PAGE_HEADING = "T-SHIRTS ";
     private final String TSHIRTS_PAGE_TITLE = "T-shirts - My Shop";
+    private Actions action;
 
     @FindBy(css = "#block_top_menu > ul > li:nth-child(3)")
     private WebElement tShirtsCatalogPortal;
@@ -47,8 +48,18 @@ public class TshirtsPage extends BasePage {
     @FindBy(css = ".layer_cart_product h2")
     private WebElement cartSubHeading;
 
+    @FindBy(id = "product")
+    private WebElement pageId;
+
+    @FindBy(css = "#product .pb-center-column")
+    private WebElement centralQuickViewArea;
+
+    @FindBy(tagName = "iframe") // frame1700061662825
+    private WebElement iframeProductDetail;
+
     public TshirtsPage(WebDriver driver) {
         super(driver);
+        this.action = new Actions(driver);
     }
 
     public void goTo() {
@@ -58,7 +69,6 @@ public class TshirtsPage extends BasePage {
     }
 
     public void hoverOverTshirt() {
-        Actions action = new Actions(driver);
         action.moveToElement(tShirtToBePurchased).build().perform();
         wait.until(ExpectedConditions.visibilityOf(quickViewPortal));
     }
@@ -69,11 +79,14 @@ public class TshirtsPage extends BasePage {
 
     public void clickQuickView() {
         quickViewPortal.click();
-        wait.until(ExpectedConditions.visibilityOf(addToCartBtn));
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iframeProductDetail));
+        //driver.switchTo().frame(iframeProductDetail);
+        wait.until(ExpectedConditions.visibilityOf(quickViewFrameHeading));
     }
 
     public String getQuickViewFrameHeading() {
-        return quickViewPortal.getText().toLowerCase().strip();
+        action.moveToElement(centralQuickViewArea).build().perform();
+        return quickViewFrameHeading.getText().toLowerCase().strip();
     }
 
 
@@ -82,13 +95,13 @@ public class TshirtsPage extends BasePage {
     }
 
     private void selectSize() {
-        Select dressSizeSelection = new Select(size);
-        dressSizeSelection.selectByVisibleText("M");
+        Select tShirtSizeSelection = new Select(size);
+        tShirtSizeSelection.selectByVisibleText("S");
     }
 
     private void selectQuantity() {
         quantity.clear();
-        quantity.sendKeys("4");
+        quantity.sendKeys("1");
     }
 
     public void addProductToCart() {
@@ -96,6 +109,7 @@ public class TshirtsPage extends BasePage {
         selectSize();
         selectQuantity();
         addToCartBtn.click();
+        driver.switchTo().parentFrame();
         wait.until(ExpectedConditions.visibilityOf(proceedToCheckoutBtn));
     }
 
