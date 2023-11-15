@@ -22,7 +22,6 @@ public class SignInTest extends BaseTest{
     private AccountPage accountPage;
     private ObjectMapper objectMapper;
 
-
     @BeforeTest
     public void setLoginPage(){
         this.homePage = new HomePage(driver);
@@ -38,53 +37,49 @@ public class SignInTest extends BaseTest{
         signInPage.goTo();
     }
 
-
-    @Test
+    @Test(priority = 1)
     public void signInPageTest(){
         Assert.assertEquals(signInPage.authenticationContainerIsPresent(), true);
         Assert.assertEquals(signInPage.registerAndLoginFormsArePresent(), true);
     }
 
-    @Test
-    public void invalidRegisterTest(){
+    @Test(priority = 2)
+    public void invalidEmailSubmissionForRegistrationTest(){
         signInPage.enterEmailToRegister("notvalidemailhere");
         signInPage.submitEmailToBeginRegistration();
         Assert.assertEquals(signInPage.isInvalidInput(), true);
         Assert.assertEquals(signInPage.invalidRegistrationInputMessage(), "Invalid email address.");
     }
 
-    @Test
+    @Test(priority = 3)
     public void successfulEmailSubmissionForRegistrationTest(){
         signInPage.enterEmailToRegister("email@em.com");
         signInPage.submitEmailToBeginRegistration();
         Assert.assertEquals(registrationPage.registrationFormIsPresent(), true);
     }
 
-
-    @Test
-    public void invalidEmailLogin() throws  IOException  {
+    @Test(priority = 4)
+    public void invalidEmailLogin() {
         signInPage.enterLoginDetails("ud", "PSNSJ");
         signInPage.submitLogin();
         Assert.assertEquals(signInPage.invalidLoginInputMsg(), Constants.LOGIN_EMAIL_INVALID_ERROR_MSG);
     }
 
-    @Test
-    public void invalidPasswordLogin() throws IOException    {
+    @Test(priority = 5)
+    public void invalidPasswordLogin() {
         signInPage.enterLoginDetails("df@jsnjkds.com", "9U");
         signInPage.submitLogin();
         Assert.assertEquals(signInPage.invalidLoginInputMsg(), Constants.LOGIN_PASSWORD_INVALID_ERROR_MSG);
     }
 
-    @Test
-    public void invalidUserLogin() throws IOException    {
+    @Test(priority = 6)
+    public void invalidUserLogin() {
         signInPage.enterLoginDetails("email@jks.com", "psnsj");
         signInPage.submitLogin();
         Assert.assertEquals(signInPage.invalidLoginInputMsg(), Constants.AUTHENTICATION_FAIL_MSG);
-
     }
 
-
-    @Test
+    @Test(priority = 7)
     public void successfulLogin() throws IOException {
         File file = new File("src/test/java/com/cta/testdata/users/valid-user-login.json");
         User user = objectMapper.readValue(file, User.class);
@@ -94,6 +89,5 @@ public class SignInTest extends BaseTest{
                 accountPage.getNameOfRegisteredUser(), user.fName() + " " + user.lName()
         );
     }
-
 }
 
