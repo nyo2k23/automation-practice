@@ -15,7 +15,7 @@ public class CheckOutPage extends BasePage {
     @FindBy(className = "breadcrumb")
     private WebElement shoppingCartSubHeading; // " > Your shopping cart"
 
-    @FindBy(css = "#cart_summary tbody")
+    @FindBy(css = "tbody tr")
     private List<WebElement> cartItems;
 
     @FindBy(css = ".cart_navigation > a.button")
@@ -63,12 +63,13 @@ public class CheckOutPage extends BasePage {
     }
 
     public int numberOfItemsInCart() {
+        wait.until(ExpectedConditions.visibilityOf(proceedToCheckOutBtn));
         return cartItems.size();
     }
 
     private WebElement getCartItemContainer(String productName) {
         for (WebElement element : cartItems) {
-            String elementText = element.findElement(By.cssSelector("td.cart_description .product_name")).getText();
+            String elementText = element.findElement(By.cssSelector(".cart_description > p")).getText();
             if (elementText.equals(productName)) {
                 return element;
             }
@@ -76,7 +77,7 @@ public class CheckOutPage extends BasePage {
         return null;
     }
 
-    public int cartItemQuantity(String itemName){
+    public int getCartItemQuantity(String itemName){
         WebElement cartItemContainer = getCartItemContainer(itemName);
         int count = Integer.parseInt(cartItemContainer.findElement(
                 By.cssSelector(".cart_quantity_input")
@@ -86,6 +87,7 @@ public class CheckOutPage extends BasePage {
 
     public void reduceQuantityOfCartItemBy1(String itemName){
             WebElement cartItemContainer = getCartItemContainer(itemName);
+            System.out.println(cartItemContainer);
             cartItemContainer.findElement(By.cssSelector(".cart_quantity .cart_quantity_down")).click();
     }
 
