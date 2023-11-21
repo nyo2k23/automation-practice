@@ -65,10 +65,6 @@ public class PurchaseSummerDressTest extends BaseTest {
         );
 
         dressesPage.goToCheckout();
-//        Assert.assertEquals(
-//                dressesPage.getCheckoutPageTitle().toLowerCase().stripLeading(),
-//                Constants.SHOPPING_CART_PAGE_SUB_HEADING.toLowerCase()
-//        );
 
         Assert.assertEquals(
                 checkOutPage.getPageTitle(),
