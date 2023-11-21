@@ -77,22 +77,31 @@ public class CheckOutPage extends BasePage {
         return null;
     }
 
-    public int getCartItemQuantity(String itemName){
+    public int getCartItemQuantity(String itemName) {
         WebElement cartItemContainer = getCartItemContainer(itemName);
         int count = Integer.parseInt(cartItemContainer.findElement(
                 By.cssSelector(".cart_quantity_input")
-                ).getAttribute("value"));
+        ).getAttribute("value"));
         return count;
     }
 
-    public void reduceQuantityOfCartItemBy1(String itemName){
-            WebElement cartItemContainer = getCartItemContainer(itemName);
-            System.out.println(cartItemContainer);
-            cartItemContainer.findElement(By.cssSelector(".cart_quantity .cart_quantity_down")).click();
+    public void reduceQuantityOfCartItemBy1(String itemName) {
+        WebElement cartItemContainer = getCartItemContainer(itemName);
+        int currentCount = getCartItemQuantity(itemName);
+        cartItemContainer.findElement(
+                By.cssSelector(".button-minus")
+        ).click();
+        WebElement itemCountAttr = cartItemContainer.findElement(
+                By.cssSelector(".cart_quantity_input"));
+        wait.until(ExpectedConditions
+                .not(ExpectedConditions.attributeToBe(
+                        itemCountAttr, "value", String.valueOf(currentCount)
+                ))
+        );
     }
 
 
-    public void removeProductFromCart(String productName){
+    public void removeProductFromCart(String productName) {
         WebElement product = getCartItemContainer(productName);
         product.findElement(By.cssSelector(".cart_delete .cart_quantity_delete")).click();
         wait.until(ExpectedConditions.invisibilityOf(product));

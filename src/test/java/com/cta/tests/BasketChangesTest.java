@@ -61,10 +61,15 @@ public class BasketChangesTest extends BaseTest{
                 checkOutPage.getCartItemQuantity(Constants.DRESS_NAME),
                 numOfSummerDressesInCart-1
         );
+        int numberOfItemsInCartBeforeRemoval = checkOutPage.numberOfItemsInCart();
+        System.out.println(numberOfItemsInCartBeforeRemoval);
+        System.out.printf("Removing product...");
         checkOutPage.removeProductFromCart(Constants.TSHIRT_TO_BE_BOUGHT);
+        int numberOfItemsInCartAfterRemoval = checkOutPage.numberOfItemsInCart();
+        System.out.println(numberOfItemsInCartAfterRemoval);
         Assert.assertEquals(
-                checkOutPage.numberOfItemsInCart(),
-                totalNumberOfProductsInCart-1
+                numberOfItemsInCartAfterRemoval,
+                numberOfItemsInCartBeforeRemoval-1
         );
     }
 }
