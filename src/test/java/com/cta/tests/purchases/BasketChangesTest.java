@@ -1,11 +1,12 @@
-package com.cta.tests;
+package com.cta.tests.purchases;
 
 import com.cta.models.User;
 import com.cta.pages.HomePage;
-import com.cta.pages.SignInPage;
+import com.cta.pages.signin.SignInPage;
 import com.cta.pages.checkout.CheckOutPage;
 import com.cta.pages.products.DressesPage;
 import com.cta.pages.products.TshirtsPage;
+import com.cta.tests.BaseTest;
 import com.cta.utils.Constants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.Assert;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 
-public class BasketChangesTest extends BaseTest{
+public class BasketChangesTest extends BaseTest {
     private HomePage homePage;
     private SignInPage signInPage;
     private DressesPage dressesPage;

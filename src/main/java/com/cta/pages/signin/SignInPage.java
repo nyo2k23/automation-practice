@@ -1,5 +1,6 @@
-package com.cta.pages;
+package com.cta.pages.signin;
 
+import com.cta.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SignInPage extends BasePage {
 
-    @FindBy(css="#header .login")
+    @FindBy(css = "#header .login")
     private WebElement signInPortal;
 
     @FindBy(id = "authentication")
@@ -49,29 +50,29 @@ public class SignInPage extends BasePage {
     @FindBy(id = "SubmitLogin")
     private WebElement submitLoginBtn;
 
-    public SignInPage(WebDriver driver){
+    public SignInPage(WebDriver driver) {
         super(driver);
     }
 
-    public void goTo(){
+    public void goTo() {
         wait.until(ExpectedConditions.visibilityOf(signInPortal));
         signInPortal.click();
     }
 
-    public boolean authenticationContainerIsPresent(){
+    public boolean authenticationContainerIsPresent() {
         return authenticationContainer.isDisplayed();
     }
 
-    public boolean registerAndLoginFormsArePresent(){
+    public boolean registerAndLoginFormsArePresent() {
         return registerForm.isDisplayed() && loginForm.isDisplayed();
     }
 
-    public void enterEmailToRegister(String email){
+    public void enterEmailToRegister(String email) {
         wait.until(ExpectedConditions.visibilityOf(registerForm));
         registerEmailInput.sendKeys(email);
     }
 
-    public void submitEmailToBeginRegistration(){
+    public void submitEmailToBeginRegistration() {
         registerEmailButton.click();
         wait.until(ExpectedConditions.or(
                 ExpectedConditions.visibilityOf(registrationErrorMessageElem),
@@ -80,31 +81,34 @@ public class SignInPage extends BasePage {
     }
 
 
-    public void enterLoginDetails(String email, String password){
+    public void enterLoginDetails(String email, String password) {
         emailLoginField.sendKeys(email);
         passwordLoginField.sendKeys(password);
     }
 
-    public void submitLogin(){
+    public void submitLogin() {
         submitLoginBtn.click();
-        wait.until(ExpectedConditions.or(
-                ExpectedConditions.visibilityOf(loginErrorMsgElem),
-                ExpectedConditions.invisibilityOf(submitLoginBtn)
-        ));
+        wait.until(
+                ExpectedConditions.or(
+                        ExpectedConditions.visibilityOf(loginErrorMsgElem),
+                        ExpectedConditions.invisibilityOf(submitLoginBtn)
+                )
+        );
     }
 
-    public boolean isValidInput(){
+    public boolean isValidInput() {
         return emailInputFine.isDisplayed();
     }
 
-    public boolean isInvalidInput(){
+    public boolean isInvalidInput() {
         return registrationErrorMessageElem.isDisplayed();
     }
 
-    public String invalidRegistrationInputMessage(){
+    public String invalidRegistrationInputMessage() {
         return registrationErrorMessageElem.getText();
     }
 
-    public String invalidLoginInputMsg() { return loginErrorMsgElem.getText(); }
-
+    public String invalidLoginInputMsg() {
+        return loginErrorMsgElem.getText();
+    }
 }

@@ -29,7 +29,7 @@ public class TshirtsPage extends BasePage {
     @FindBy(tagName = "h1")
     private WebElement quickViewFrameHeading;
 
-    // the following 6 elems are the same for product catalogs
+    // some of the following elems are the same for all product catalogs
     @FindBy(id = "group_1")
     private WebElement size;
 
@@ -54,7 +54,7 @@ public class TshirtsPage extends BasePage {
     @FindBy(css = "#product .pb-center-column")
     private WebElement centralQuickViewArea;
 
-    @FindBy(tagName = "iframe") // frame1700061662825
+    @FindBy(tagName = "iframe")
     private WebElement iframeProductDetail;
 
     public TshirtsPage(WebDriver driver) {
