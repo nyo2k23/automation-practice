@@ -1,10 +1,11 @@
-package com.cta.tests;
+package com.cta.tests.signin;
 
 import com.cta.models.User;
-import com.cta.pages.AccountPage;
+import com.cta.pages.account.AccountPage;
 import com.cta.pages.HomePage;
-import com.cta.pages.RegistrationPage;
-import com.cta.pages.SignInPage;
+import com.cta.pages.signin.RegistrationPage;
+import com.cta.pages.signin.SignInPage;
+import com.cta.tests.BaseTest;
 import com.cta.utils.Constants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.Assert;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.IOException;
 
-public class SignInTest extends BaseTest{
+public class SignInTest extends BaseTest {
     private HomePage homePage;
     private SignInPage signInPage;
     private RegistrationPage registrationPage;

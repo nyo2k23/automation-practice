@@ -1,5 +1,6 @@
-package com.cta.pages;
+package com.cta.pages.signin;
 
+import com.cta.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -65,10 +66,12 @@ public class RegistrationPage extends BasePage {
     }
 
     public boolean registrationFormIsPresent() {
-        if (registrationForm.isDisplayed()) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(registrationForm));
             return true;
+        } catch (Exception ex) {
+            return false;
         }
-        return false;
     }
 
     public void enterUserDetails(
@@ -98,10 +101,12 @@ public class RegistrationPage extends BasePage {
 
     public void submitAccount() {
         submitBtn.click();
-        wait.until(ExpectedConditions.or(
-                ExpectedConditions.visibilityOf(alertContainer),
-                ExpectedConditions.invisibilityOf(submitBtn)
-        ));
+        wait.until(
+                ExpectedConditions.or(
+                        ExpectedConditions.visibilityOf(alertContainer),
+                        ExpectedConditions.invisibilityOf(submitBtn)
+                )
+        );
 
     }
 
@@ -116,5 +121,4 @@ public class RegistrationPage extends BasePage {
     public String getNameOfRegisteredUser() {
         return accountHolder.getText();
     }
-
 }
